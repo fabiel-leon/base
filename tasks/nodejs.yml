@@ -1,6 +1,6 @@
 ---
 - name: Install Pip
-  apt: name=python-pip state=present
+  apt: name=python-pip state=present update_cache=yes  cache_valid_time=86400
   become: yes
 
 - name: Install Python SSL3 Dependencies
@@ -26,5 +26,5 @@
     - deb-src https://deb.nodesource.com/node_6.x {{ ansible_distribution_release }} main
 
 - name: Install Node
-  apt: name=nodejs state=present
+  apt: name=nodejs state=present update_cache=yes  cache_valid_time=86400
   become: yes

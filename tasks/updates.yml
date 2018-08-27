@@ -11,9 +11,9 @@
   apt: pkg=aptitude state=present
   become: yes
 
-- name: Update APT
-  apt: update_cache=yes upgrade=safe cache_valid_time=86400
-  become: yes
+# - name: Update APT
+#   apt: update_cache=yes upgrade=safe cache_valid_time=86400
+#   become: yes
 
 - name: Install APT & Ubuntu Utils
   apt: pkg={{ item }} state=present
@@ -23,6 +23,11 @@
     - update-notifier-common
     - apt-transport-https
     - landscape-client
+    - dbus
+    - tzdata
+
+# - name: Restart dbus
+#   service: name=dbus state=restarted
 
 - name: Configure Landscape Sysinfo
   copy:

@@ -1,6 +1,6 @@
 ---
 - name: Install Bash Completion
-  apt: package=bash-completion state=present
+  apt: package=bash-completion state=present update_cache=yes  cache_valid_time=86400
   become: yes
 
 - name: Turn On Color Prompt

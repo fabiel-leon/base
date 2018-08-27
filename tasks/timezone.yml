@@ -7,10 +7,25 @@
   apt: pkg=ntpdate state=absent
   become: yes
 
+# locale-gen de_DE.UTF-8
 - name: Check Current Timezone
   command: cat /etc/timezone
   register: current_timezone
   changed_when: no
+
+# ln -fs /usr/share/zoneinfo/US/Pacific-New /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+
+# FROM ubuntu:16.04
+
+# RUN apt-get update && \
+#     apt-get install -y software-properties-common apt-utils locales tzdata
+
+# RUN echo "tzdata tzdata/Areas select Europe" > timezone.txt
+# RUN echo "tzdata tzdata/Zones/Europe select Rome" >> timezone.txt
+# RUN debconf-set-selections timezone.txt
+# RUN rm /etc/timezone
+# RUN rm /etc/localtime
+# RUN dpkg-reconfigure -f noninteractive tzdata
 
 - name: Set Timezone
   command: timedatectl set-timezone {{ timezone }}

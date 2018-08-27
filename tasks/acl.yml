@@ -1,6 +1,6 @@
 ---
 - name: Install Linux ACLs
-  apt: package=acl state=present
+  apt: package=acl state=present cache_valid_time=86400 update_cache=yes 
   become: yes
   notify: Remount Root
 
@@ -20,12 +20,12 @@
 
 # Woo! Kinda sorta super kludgy solution to refreshing SSH connection, but like holy crap it actually works!
 # http://stackoverflow.com/questions/26677064/create-and-use-group-without-restart/37337848#37337848
-- name: Restart SSH
-  shell: sleep 1; pkill -u {{ ansible_user }} sshd
-  async: 3
-  poll: 2
-  when:
-    - group_added is changed
-    - ansible_connection | default('smart') != 'local'
-    - ansible_connection | default('smart') != 'docker'
+# - name: Restart SSH
+#   shell: sleep 1; pkill -u {{ ansible_user }} sshd
+#   async: 3
+#   poll: 2
+#   when:
+#     - group_added is changed
+#     - ansible_connection | default('smart') != 'local'
+#     - ansible_connection | default('smart') != 'docker'
 # meta: reset_connection when support for 2.1 and 2.2 is dropped

@@ -1,5 +1,5 @@
 # Created by https://www.gitignore.io/api/osx,ruby,vagrant,textmate
-
+/spec/
 ### OSX ###
 .DS_Store
 .AppleDouble
